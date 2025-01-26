@@ -1,0 +1,8 @@
+<% include('layout', { body: null }) %>
+<h2><%= typeof producto !== 'undefined' ? 'Editar Producto' : 'Agregar Producto' %></h2>
+<form action="<%= typeof producto !== 'undefined' ? '/edit/' + producto.id : '/add' %>" method="POST">
+  <label>Nombre: <input type="text" name="nombre" required value="<%= typeof producto !== 'undefined' ? producto.nombre : '' %>"></label>
+  <label>Precio: <input type="number" name="precio" step="0.01" required value="<%= typeof producto !== 'undefined' ? producto.precio : '' %>"></label>
+  <label>Stock: <input type="number" name="stock" required value="<%= typeof producto !== 'undefined' ? producto.stock : '' %>"></label>
+  <button type="submit"><%= typeof producto !== 'undefined' ? 'Actualizar' : 'Guardar' %></button>
+</form>
