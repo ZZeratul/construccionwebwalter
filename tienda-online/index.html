@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Online</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Bienvenido a la Tienda Online</h1>
+
+  <h2>Productos</h2>
+  <div id="productos"></div>
+
+  <h2>Clientes</h2>
+  <div id="clientes"></div>
+
+  <footer>
+    <p>© 2025 Tienda Online</p>
+  </footer>
+
+  <script>
+    // 🔹 Cargar productos desde la API
+    fetch('/productos')
+      .then(response => response.json())
+      .then(productos => {
+        const productosDiv = document.getElementById('productos');
+        productos.forEach(producto => {
+          const productoElement = document.createElement('div');
+          productoElement.classList.add('producto');
+
+          productoElement.innerHTML = `
+            <img src="${producto.imagen}" alt="${producto.nombre}">
+            <h3>${producto.nombre}</h3>
+            <p>${producto.detalle}</p>
+            <p>$${producto.precio}</p>
+          `;
+
+          productosDiv.appendChild(productoElement);
+        });
+      })
+      .catch(error => {
+        console.error('Error al cargar productos', error);
+      });
+
+    // 🔹 Cargar clientes desde la API
+    fetch('/clientes')
+      .then(response => response.json())
+      .then(clientes => {
+        const clientesDiv = document.getElementById('clientes');
+        clientes.forEach(cliente => {
+          const clienteElement = document.createElement('div');
+          clienteElement.classList.add('cliente');
+
+          clienteElement.innerHTML = `
+            <p><strong>CI:</strong> ${cliente.ci}</p>
+            <p><strong>Nombre:</strong> ${cliente.nombres} ${cliente.apellidos}</p>
+            <p><strong>Celular:</strong> ${cliente.celular}</p>
+            <p><strong>Correo:</strong> ${cliente.correo}</p>
+          `;
+
+          clientesDiv.appendChild(clienteElement);
+        });
+      })
+      .catch(error => {
+        console.error('Error al cargar clientes', error);
+      });
+  </script>
+</body>
+</html>
