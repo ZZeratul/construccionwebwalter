@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // db.js
 import mysql from 'mysql2';  // Asegúrate de usar 'import' correctamente
 import { MongoClient } from 'mongodb';  // Importa MongoClient para MongoDB
@@ -37,3 +38,26 @@ mysqlConnection.connect(err => {
 
 // Exporta las conexiones
 export { connectToMongo, mysqlConnection };
+=======
+const mysql=require('mysql2');
+
+//Configurar la conexion
+const conection=mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'bd_ventas'
+
+});
+
+//Conectar a la base de datos
+conection.connect((error)=>{
+    if(error){
+        console.log('Error al conectar a la base de datos');
+        return;
+    }
+    console.log('Conectado a la base de datos');
+});
+
+module.exports=conection;
+>>>>>>> 4d1073aff7439a15a9526d2a5a356cb341892007
